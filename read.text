@@ -1,0 +1,66 @@
+const express = require('express');
+const app = express();
+const helmet = require("helmet");
+const authRoute = require('./routes/auth');
+const con = require('./helpers/db');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const morgan = require('morgan');
+const forgotPassRoute = require('./routes/reset-pass');
+const home = require('./routes/home');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const Profile = require('./model/profileSchema');
+const path = require('path');
+const { diskStorage } = require('multer');
+
+dotenv.config();
+
+app.use(morgan('tiny'));
+app.use(helmet());
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'uploads')));
+
+app.use(express.json()); 
+
+app.use('/api/user',authRoute);
+app.use('/api/user',home);
+app.use('/user/forgot-password',forgotPassRoute);
+
+
+const Storage = multer.diskStorage({
+  destination: "uploads/",
+  filename: (req,file,cb)=>{
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({
+  storage: Storage,
+}).single('testImage');
+
+app.post('/upload',async(req,res)=>{
+  console.log(req.file)
+  upload(req,res,(err)=>{
+    if(err){
+      console.log(err);
+    }
+    else{
+      const newImage = new Profile({
+        name: req.body.name,
+        bio: req.body.bio,
+        phoneNumber: req.body.phoneNumber,
+        profilePicture: req.filename
+      })
+       newImage.save()
+      .then(()=> res.send('successfully uploaded'))
+      .catch((err)=> console.log(err));
+    }
+  });
+});
+
+
+app.listen(3000,()=>{
+    console.log("port running in 3000");
+});

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <style>
+            
+        table {
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        </style> -->
+        
+    </head>
+    <body>
+        <div style="width: 85%; margin: 0 7.5%;">
+            <div style="text-align: center; padding-left: 50px;">            
+                <h3>Report</h5>                
+                    <img src="Goutham.jpg" style="width:300px; height:300px" >
+                        <!-- <p ><%= user.name %></p><br>
+                        <p><%= user.phoneNumber %></p><br>
+                        <p><%= user.bio %></p><br>
+                 -->
+
+             </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <style>
+        table {
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        </style> -->
+        <style>
+           body{ border: 1px solid black;
+           }
+           name {
+            padding: auto;
+           }
+        </style>
+    </head>
+    <body>
+        <div style="width: 85%; margin: 0 7.1%;">
+            <div style="text-align: center; padding-left: 10px;">            
+                <h3>My Profile</h5>                
+                    <img src="<%= profile.profilePicture %>" style="width:300px; height:300px">
+                        <p class="name"><span>name:   </span><%= profile.name %></p><br>
+                        <p class="phnnumber">phoneNumber:  <%= profile.phoneNumber %></p><br>
+                        <p class="bio">Bio:  <%= profile.bio %></p><br>
+                
+
+             </div>
+        </div>
+    </body>
+</html>
